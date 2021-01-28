@@ -1,5 +1,7 @@
 # project-two
 
+To make the database automatically:
+sequelize db:create
 <!-- To create a branch:
 $ git checkout -b theBranchName
 To see all branches:
