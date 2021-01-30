@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const getDefaultCategories = require('./default-categories')
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -20,7 +21,11 @@ module.exports = function(app) {
   app.post("/api/signup", (req, res) => {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      BudgetCategories: getDefaultCategories()
+    },
+    {
+      include: [db.BudgetCategory]
     })
       .then(() => {
         res.redirect(307, "/api/login");
@@ -36,18 +41,90 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
+  // Edits to GET route for user data
+
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
-      // Otherwise send back the user's email and id
+      // Otherwise send back the user's data
       // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id
+      db.User.findOne({ 
+        where: { id: req.user.id },
+        include: [db.BudgetCategory],
+        attributes: {exclude: ['password']},
+      }).then(user => {
+        res.json(user);
       });
     }
   });
+
+  // Brand new code for posting new category
+  app.post ("/api/category", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetCategory.create({ 
+        desc: req.body.desc,
+        UserId: req.user.id
+      }).then(BudgetCategory => {
+        res.json(BudgetCategory);
+      });
+    }
+  });
+
+  // Posting a new line item
+  app.post ("/api/lineitem", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetLineItem.create({ 
+        desc: req.body.desc,
+        vendor: req.body.vendor,
+        estimated_cost: req.body.estimated_cost,
+        actual_cost: req.body.actual_cost,
+        BudgetCategoryId: req.body.BudgetCategoryId
+      }).then(BudgetLineItem => {
+        res.json(BudgetLineItem);
+      });
+    }
+  });
+
+  // Code for PUT, updating a category
+  app.put ("/api/category", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetCategory.update({
+        desc: req.body.desc
+      },
+      {
+        where: { id: req.body.id }
+      }).then(BudgetCategory => {
+        res.json(BudgetCategory);
+      });
+    }
+  });
+
+  // Code for PUT, updating a line item
+  app.put ("/api/lineitem", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetLineItem.update({
+        desc: req.body.desc,
+        vendor: req.body.vendor,
+        estimated_cost: req.body.estimated_cost,
+        actual_cost: req.body.actual_cost
+      },
+      {
+        where: { BudgetCategoryId: req.body.BudgetCategoryId }
+      }).then(BudgetLineItem => {
+        res.json(BudgetLineItem);
+      });
+    }
+  });
+
 };
