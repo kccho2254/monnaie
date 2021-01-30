@@ -127,4 +127,22 @@ module.exports = function(app) {
     }
   });
 
+  app.delete("/api/category/:id", (req, res) => {
+    db.BudgetCategory.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(dbUser => {
+      res.json(dbUser);
+    });
+  });
+  app.delete("/api/lineitem/:id", (req, res) => {
+    db.BudgetLineItem.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(dbUser => {
+      res.json(dbUser);
+    });
+  });
 };
