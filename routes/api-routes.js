@@ -122,23 +122,12 @@ module.exports = function(app) {
 
   // });
   app.delete("/api/budget_data/:id", (req, res) => {
-    const condition = "id = " + req.params.id;
-
-    user.delete(condition, result => {
-      if (result.affectedRows === 0) {
-        // If no rows were changed, then the ID must not exist, so 404
-        return res.status(404).end();
+    db.BudgetCategory.destroy({
+      where: {
+        id: req.params.id
       }
-      res.status(200).end();
+    }).then(dbUser => {
+      res.json(dbUser);
     });
   });
-  // ////
-  //   db.BudgetCategory.destroy({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(dbUser => {
-  //     res.json(dbUser);
-  //   });
-  // });
 };
