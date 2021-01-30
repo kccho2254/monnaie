@@ -1,7 +1,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
-const getDefaultCategories = require('./default-categories')
+const getDefaultCategories = require("./default-categories");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -19,14 +19,16 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", (req, res) => {
-    db.User.create({
-      email: req.body.email,
-      password: req.body.password,
-      BudgetCategories: getDefaultCategories()
-    },
-    {
-      include: [db.BudgetCategory]
-    })
+    db.User.create(
+      {
+        email: req.body.email,
+        password: req.body.password,
+        BudgetCategories: getDefaultCategories()
+      },
+      {
+        include: [db.BudgetCategory]
+      }
+    )
       .then(() => {
         res.redirect(307, "/api/login");
       })
@@ -51,22 +53,41 @@ module.exports = function(app) {
     } else {
       // Otherwise send back the user's data
       // Sending back a password, even a hashed password, isn't a good idea
-      db.User.findOne({ 
+      db.User.findOne({
         where: { id: req.user.id },
         include: [db.BudgetCategory],
-        attributes: {exclude: ['password']},
+        attributes: { exclude: ["password"] }
       }).then(user => {
         res.json(user);
       });
     }
   });
-
+  app.get("/api/category", (req, res) => {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      db.BudgetCategory.findAll({}).then(dbUser => {
+        res.json(dbUser);
+      });
+    }
+  });
+  app.get("/api/lineitem", (req, res) => {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      db.BudgetLineItem.findAll({}).then(dbUser => {
+        res.json(dbUser);
+      });
+    }
+  });
   // Brand new code for posting new category
-  app.post ("/api/category", (req, res) => {
+  app.post("/api/category", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetCategory.create({ 
+      db.BudgetCategory.create({
         desc: req.body.desc,
         UserId: req.user.id
       }).then(BudgetCategory => {
@@ -76,11 +97,11 @@ module.exports = function(app) {
   });
 
   // Posting a new line item
-  app.post ("/api/lineitem", (req, res) => {
+  app.post("/api/lineitem", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetLineItem.create({ 
+      db.BudgetLineItem.create({
         desc: req.body.desc,
         vendor: req.body.vendor,
         estimated_cost: req.body.estimated_cost,
@@ -93,38 +114,41 @@ module.exports = function(app) {
   });
 
   // Code for PUT, updating a category
-  app.put ("/api/category", (req, res) => {
+  app.put("/api/category", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetCategory.update({
-        desc: req.body.desc
-      },
-      {
-        where: { id: req.body.id }
-      }).then(BudgetCategory => {
+      db.BudgetCategory.update(
+        {
+          desc: req.body.desc
+        },
+        {
+          where: { id: req.body.id }
+        }
+      ).then(BudgetCategory => {
         res.json(BudgetCategory);
       });
     }
   });
 
   // Code for PUT, updating a line item
-  app.put ("/api/lineitem", (req, res) => {
+  app.put("/api/lineitem", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetLineItem.update({
-        desc: req.body.desc,
-        vendor: req.body.vendor,
-        estimated_cost: req.body.estimated_cost,
-        actual_cost: req.body.actual_cost
-      },
-      {
-        where: { BudgetCategoryId: req.body.BudgetCategoryId }
-      }).then(BudgetLineItem => {
+      db.BudgetLineItem.update(
+        {
+          desc: req.body.desc,
+          vendor: req.body.vendor,
+          estimated_cost: req.body.estimated_cost,
+          actual_cost: req.body.actual_cost
+        },
+        {
+          where: { BudgetCategoryId: req.body.BudgetCategoryId }
+        }
+      ).then(BudgetLineItem => {
         res.json(BudgetLineItem);
       });
     }
   });
-
 };

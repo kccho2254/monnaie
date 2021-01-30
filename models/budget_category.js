@@ -1,3 +1,6 @@
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
 const BudgetLineItem = require("./budget_line_item")
 
 
