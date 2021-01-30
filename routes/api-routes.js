@@ -2,7 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const user = require("../models/user");
-const body = require("..models/budget_line_item");
+const BudgetLinetems = require("..models/budget_line_item");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -62,10 +62,10 @@ module.exports = function(app) {
     } else {
       // Otherwise send back budget data
       res.json({
-        desc: req.body.desc,
-        vendor: req.body.vendor,
-        estimated_cost: req.body.estimated_cost,
-        actual_cost: req.body.actual_cost
+        desc: req.budgetlineitems.desc,
+        vendor: req.budgetlineitems.vendor,
+        estimated_cost: req.budgetlineitems.estimated_cost,
+        actual_cost: req.budgetlineitems.actual_cost
       });
     }
   });
@@ -76,10 +76,10 @@ module.exports = function(app) {
     } else {
       // Otherwise send back budget data
       res.json({
-        desc: req.body.desc,
-        vendor: req.body.vendor,
-        estimated_cost: req.body.estimated_cost,
-        actual_cost: req.body.actual_cost
+        desc: req.budgetlineitems.desc,
+        vendor: req.budgetlineitems.vendor,
+        estimated_cost: req.budgetlineitems.estimated_cost,
+        actual_cost: req.budgetlineitems.actual_cost
       });
     }
   });
@@ -88,11 +88,12 @@ module.exports = function(app) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
-      db.BudgetLineItem.create({
-        desc: req.body.desc,
-        vendor: req.body.vendor,
-        estimated_cost: req.body.estimated_cost,
-        actual_cost: req.body.actual_cost
+      // db.BudgetLineItem.create({
+      res.json({
+        desc: req.budgetlineitems.desc,
+        vendor: req.budgetlineitems.vendor,
+        estimated_cost: req.budgetlineitems.estimated_cost,
+        actual_cost: req.budgetlineitems.actual_cost
       });
     }
   });
