@@ -31,3 +31,4 @@ Delete locally
 
 We need to drop databases after each reset because it doesn't save in the json thingy
 Or we need to save database info after each reset in the json browser
+[object Object] displaying on invalid input
