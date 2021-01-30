@@ -2,7 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const user = require("../models/user");
-const BudgetLinetems = require("..models/budget_line_item");
+const BudgetLineItem = require("../models/budget_line_item");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -56,18 +56,15 @@ module.exports = function(app) {
   // Routes for interacting with budget information
 
   app.get("/api/budget_data", (req, res) => {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    } else {
-      // Otherwise send back budget data
-      res.json({
-        desc: req.budgetlineitems.desc,
-        vendor: req.budgetlineitems.vendor,
-        estimated_cost: req.budgetlineitems.estimated_cost,
-        actual_cost: req.budgetlineitems.actual_cost
-      });
-    }
+    // Otherwise send back budget data
+    res.json({
+      desc: req.body.desc,
+      vendor: req.body.vendor,
+      estimated_cost: req.body.estimated_cost,
+      actual_cost: req.body.actual_cost,
+      createdAt: req.body.createdAt,
+      updatedAt: req.body.updatedAt
+    });
   });
   app.get("/api/budget_categories", (req, res) => {
     if (!req.user) {
@@ -75,11 +72,32 @@ module.exports = function(app) {
       res.json({});
     } else {
       // Otherwise send back budget data
-      res.json({
-        desc: req.budgetlineitems.desc,
-        vendor: req.budgetlineitems.vendor,
-        estimated_cost: req.budgetlineitems.estimated_cost,
-        actual_cost: req.budgetlineitems.actual_cost
+      //     res.json({
+      //       desc: req.body.desc,
+      //       vendor: req.body.vendor,
+      //       estimated_cost: req.body.estimated_cost,
+      //       actual_cost: req.body.actual_cost
+      //     });
+      //   }
+      // });
+      db.User.findOne({
+        where: { id: req.user.id },
+        include: [db.BudgetCategory],
+        attributes: { exclude: ["password"] }
+      }).then(user => {
+        res.json(user);
+      });
+    }
+  });
+  app.post("/api/category", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetCategory.create({
+        desc: req.body.desc,
+        UserId: req.user.id
+      }).then(BudgetCategory => {
+        res.json(BudgetCategory);
       });
     }
   });
@@ -88,12 +106,11 @@ module.exports = function(app) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
-      // db.BudgetLineItem.create({
-      res.json({
-        desc: req.budgetlineitems.desc,
-        vendor: req.budgetlineitems.vendor,
-        estimated_cost: req.budgetlineitems.estimated_cost,
-        actual_cost: req.budgetlineitems.actual_cost
+      db.User.create({
+        desc: req.body.desc,
+        vendor: req.body.vendor,
+        estimated_cost: req.body.estimated_cost,
+        actual_cost: req.body.actual_cost
       });
     }
   });
@@ -114,4 +131,12 @@ module.exports = function(app) {
       res.status(200).end();
     });
   });
+  //   db.User.destroy({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(dbUser => {
+  //     res.json(dbUser);
+  //   });
+  // });
 };
