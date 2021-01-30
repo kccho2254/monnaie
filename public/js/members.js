@@ -4,4 +4,11 @@ $(document).ready(() => {
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
   });
+
+  $.get("/api/budget_data").then(data => {
+    $(".budget-desc").text(data.desc);
+    $(".budget-vendor").text(data.vendor);
+    $(".budget-estimate").text(data.estimated_cost);
+    $(".budget-actual").text(data.actual_cost);
+  });
 });

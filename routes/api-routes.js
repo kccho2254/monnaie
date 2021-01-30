@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const user = require("../models/user");
+const body = require("..models/budget_line_item");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -49,5 +51,66 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
+  });
+
+  // Routes for interacting with budget information
+
+  app.get("/api/budget_data", (req, res) => {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      // Otherwise send back budget data
+      res.json({
+        desc: req.body.desc,
+        vendor: req.body.vendor,
+        estimated_cost: req.body.estimated_cost,
+        actual_cost: req.body.actual_cost
+      });
+    }
+  });
+  app.get("/api/budget_categories", (req, res) => {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      // Otherwise send back budget data
+      res.json({
+        desc: req.body.desc,
+        vendor: req.body.vendor,
+        estimated_cost: req.body.estimated_cost,
+        actual_cost: req.body.actual_cost
+      });
+    }
+  });
+  app.post("/api/budget_data", (req, res) => {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      db.BudgetLineItem.create({
+        desc: req.body.desc,
+        vendor: req.body.vendor,
+        estimated_cost: req.body.estimated_cost,
+        actual_cost: req.body.actual_cost
+      });
+    }
+  });
+  // app.put("/api/budget_data", (req, res) =>{
+  //   if (!req.user) {
+  //     // The user is not logged in, send back an empty object
+  //     res.json({});
+
+  // });
+  app.delete("/api/budget_data/:id", (req, res) => {
+    const condition = "id = " + req.params.id;
+
+    user.delete(condition, result => {
+      if (result.affectedRows === 0) {
+        // If no rows were changed, then the ID must not exist, so 404
+        return res.status(404).end();
+      }
+      res.status(200).end();
+    });
   });
 };
