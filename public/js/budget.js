@@ -18,7 +18,9 @@ let budget_categories = [
             {
                 desc: "Hummingbird House",
                 estimated_cost: 480000,
-                actual_cost: 0
+                actual_cost: 0,
+                createdAt: Date.now(), 
+                updatedAt: Date.now()
             },
             {
                 desc: "Parking fee",

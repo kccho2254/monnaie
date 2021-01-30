@@ -55,18 +55,23 @@ module.exports = function(app) {
 
   // Routes for interacting with budget information
 
-  app.get("/api/budget_data", (req, res) => {
-    // Otherwise send back budget data
-    res.json({
-      desc: req.body.desc,
-      vendor: req.body.vendor,
-      estimated_cost: req.body.estimated_cost,
-      actual_cost: req.body.actual_cost,
-      createdAt: req.body.createdAt,
-      updatedAt: req.body.updatedAt
+  // app.get("/api/budget_data", (req, res) => {
+  //   // Otherwise send back budget data
+  //   res.json({
+  //     desc: req.body.desc,
+  //     vendor: req.body.vendor,
+  //     estimated_cost: req.body.estimated_cost,
+  //     actual_cost: req.body.actual_cost,
+  //     createdAt: req.body.createdAt,
+  //     updatedAt: req.body.updatedAt
+  //   });
+  // });
+  app.get("/api/budget_categories", (req, res) => {
+    db.BudgetCategory.findAll({}).then(dbUser => {
+      res.json(dbUser);
     });
   });
-  app.get("/api/budget_categories", (req, res) => {
+  app.get("/api/budget_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -80,12 +85,8 @@ module.exports = function(app) {
       //     });
       //   }
       // });
-      db.User.findOne({
-        where: { id: req.user.id },
-        include: [db.BudgetCategory],
-        attributes: { exclude: ["password"] }
-      }).then(user => {
-        res.json(user);
+      db.BudgetLineItem.findAll({}).then(dbUser => {
+        res.json(dbUser);
       });
     }
   });
@@ -131,7 +132,8 @@ module.exports = function(app) {
       res.status(200).end();
     });
   });
-  //   db.User.destroy({
+  // ////
+  //   db.BudgetCategory.destroy({
   //     where: {
   //       id: req.params.id
   //     }
