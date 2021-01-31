@@ -1,7 +1,6 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
-const getDefaultCategories = require('./default-categories')
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -22,15 +21,11 @@ module.exports = function(app) {
     db.User.create({
       email: req.body.email,
       password: req.body.password,
-      BudgetCategories: getDefaultCategories()
-    },
-    {
-      include: [db.BudgetCategory]
     })
       .then(() => {
         res.redirect(307, "/api/login");
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(401).json(err);
       });
   });
@@ -51,80 +46,109 @@ module.exports = function(app) {
     } else {
       // Otherwise send back the user's data
       // Sending back a password, even a hashed password, isn't a good idea
-      db.User.findOne({ 
-        where: { id: req.user.id },
-        include: [db.BudgetCategory],
-        attributes: {exclude: ['password']},
-      }).then(user => {
+      db.User.findOne({
+        where: {
+          id: req.user.id
+        },
+        include: [db.BudgetCategory, db.BudgetLineItem],
+        attributes: {
+          exclude: ["password"]
+        }
+      }).then((user) => {
         res.json(user);
       });
     }
   });
 
-  // Brand new code for posting new category
-  app.post ("/api/category", (req, res) => {
+  // Route for getting all default categories that are not assigned to any users
+  app.get("/api/default_categories", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetCategory.create({ 
-        desc: req.body.desc,
-        UserId: req.user.id
-      }).then(BudgetCategory => {
-        res.json(BudgetCategory);
+      db.BudgetCategory.findAll({
+        where: {
+          UserId: null // we filter on UserId == null, because these categories are not assigned to a user.
+        }
+      }).then(defaultCategories => {
+        res.json(defaultCategories);
       });
     }
   });
 
-  // Posting a new line item
-  app.post ("/api/lineitem", (req, res) => {
+  // Brand new code for posting new category
+  app.post("/api/category", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetLineItem.create({ 
+      db.BudgetCategory.create({
         desc: req.body.desc,
-        vendor: req.body.vendor,
-        estimated_cost: req.body.estimated_cost,
-        actual_cost: req.body.actual_cost,
-        BudgetCategoryId: req.body.BudgetCategoryId
-      }).then(BudgetLineItem => {
-        res.json(BudgetLineItem);
+        UserId: req.user.id
+      }).then(budgetCategory => {
+        res.json(budgetCategory);
       });
     }
   });
 
   // Code for PUT, updating a category
-  app.put ("/api/category", (req, res) => {
+  app.put("/api/category", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetCategory.update({
-        desc: req.body.desc
-      },
-      {
-        where: { id: req.body.id }
-      }).then(BudgetCategory => {
-        res.json(BudgetCategory);
+      db.BudgetCategory.update(
+        {
+          desc: req.body.desc
+        },
+        {
+          where: {
+            id: req.body.id,
+            UserId: req.user.id // Restrict only user to modify their own custom category
+          }
+        }
+      ).then((budgetCategory) => {
+        res.json(budgetCategory);
+      });
+    }
+  });
+
+  // Posting a new line item
+  app.post("/api/lineitem", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetLineItem.create({
+        desc: req.body.desc,
+        vendor: req.body.vendor,
+        estimated_cost: req.body.estimated_cost,
+        actual_cost: req.body.actual_cost,
+        BudgetCategoryId: req.body.BudgetCategoryId,
+        UserId: req.user.id
+      }).then((budgetLineItem) => {
+        res.json(budgetLineItem);
       });
     }
   });
 
   // Code for PUT, updating a line item
-  app.put ("/api/lineitem", (req, res) => {
+  app.put("/api/lineitem", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
-      db.BudgetLineItem.update({
-        desc: req.body.desc,
-        vendor: req.body.vendor,
-        estimated_cost: req.body.estimated_cost,
-        actual_cost: req.body.actual_cost
-      },
-      {
-        where: { BudgetCategoryId: req.body.BudgetCategoryId }
-      }).then(BudgetLineItem => {
-        res.json(BudgetLineItem);
+      db.BudgetLineItem.update(
+        {
+          desc: req.body.desc,
+          vendor: req.body.vendor,
+          estimated_cost: req.body.estimated_cost,
+          actual_cost: req.body.actual_cost
+        },
+        {
+          where: {
+            BudgetCategoryId: req.body.BudgetCategoryId,
+            UserId: req.user.id // Restrict only user to modify their own budget line item
+          }
+        }
+      ).then((budgetLineItem) => {
+        res.json(budgetLineItem);
       });
     }
   });
-
 };

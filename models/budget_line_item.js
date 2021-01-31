@@ -18,8 +18,23 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: true
     }
-
   });
+
+  BudgetLineItem.associate = function(models) {
+    models.BudgetLineItem.belongsTo(models.BudgetCategory, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: false
+      }
+    });
+
+    models.BudgetLineItem.belongsTo(models.User, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
 
   return BudgetLineItem;
 };
