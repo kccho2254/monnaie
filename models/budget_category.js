@@ -1,6 +1,3 @@
-const BudgetLineItem = require("./budget_line_item")
-
-
 module.exports = function(sequelize, DataTypes) {
   const BudgetCategory = sequelize.define('BudgetCategory', {
     desc: {
@@ -9,11 +6,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  BudgetCategory.associate = function (models){
-    BudgetCategory.hasMany(models.BudgetLineItem, {
-      onDelete: "cascade"
-    })
-  }
+  BudgetCategory.associate = function (models) {
+    models.BudgetCategory.hasMany(models.BudgetLineItem);
+    models.BudgetCategory.belongsTo(models.User, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        allowNull: true // Note: We will allow null because we have default categories which are not customized by user
+      }
+    });
+  };
 
   return BudgetCategory;
 };
