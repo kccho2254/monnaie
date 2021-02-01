@@ -1,10 +1,6 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
-<<<<<<< HEAD
-const getDefaultCategories = require("./default-categories");
-=======
->>>>>>> d6f606f000d930dfe14a5d7ffb9b9de2ca673645
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -22,27 +18,14 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", (req, res) => {
-<<<<<<< HEAD
-    db.User.create(
-      {
-        email: req.body.email,
-        password: req.body.password,
-        BudgetCategories: getDefaultCategories()
-      },
-      {
-        include: [db.BudgetCategory]
-      }
-    )
-=======
     db.User.create({
       email: req.body.email,
-      password: req.body.password,
+      password: req.body.password
     })
->>>>>>> d6f606f000d930dfe14a5d7ffb9b9de2ca673645
       .then(() => {
         res.redirect(307, "/api/login");
       })
-      .catch((err) => {
+      .catch(err => {
         res.status(401).json(err);
       });
   });
@@ -64,12 +47,6 @@ module.exports = function(app) {
       // Otherwise send back the user's data
       // Sending back a password, even a hashed password, isn't a good idea
       db.User.findOne({
-<<<<<<< HEAD
-        where: { id: req.user.id },
-        include: [db.BudgetCategory],
-        attributes: { exclude: ["password"] }
-      }).then(user => {
-=======
         where: {
           id: req.user.id
         },
@@ -77,44 +54,11 @@ module.exports = function(app) {
         attributes: {
           exclude: ["password"]
         }
-      }).then((user) => {
->>>>>>> d6f606f000d930dfe14a5d7ffb9b9de2ca673645
+      }).then(user => {
         res.json(user);
       });
     }
   });
-<<<<<<< HEAD
-  app.get("/api/category", (req, res) => {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    } else {
-      db.BudgetCategory.findAll({}).then(dbUser => {
-        res.json(dbUser);
-      });
-    }
-  });
-  app.get("/api/lineitem", (req, res) => {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    } else {
-      db.BudgetLineItem.findAll({}).then(dbUser => {
-        res.json(dbUser);
-      });
-    }
-  });
-  // Brand new code for posting new category
-  app.post("/api/category", (req, res) => {
-    if (!req.user) {
-      res.json({});
-    } else {
-      db.BudgetCategory.create({
-        desc: req.body.desc,
-        UserId: req.user.id
-      }).then(BudgetCategory => {
-        res.json(BudgetCategory);
-=======
 
   // Route for getting all default categories that are not assigned to any users
   app.get("/api/default_categories", (req, res) => {
@@ -127,26 +71,16 @@ module.exports = function(app) {
         }
       }).then(defaultCategories => {
         res.json(defaultCategories);
->>>>>>> d6f606f000d930dfe14a5d7ffb9b9de2ca673645
       });
     }
   });
 
-<<<<<<< HEAD
-  // Posting a new line item
-  app.post("/api/lineitem", (req, res) => {
-    if (!req.user) {
-      res.json({});
-    } else {
-      db.BudgetLineItem.create({
-=======
   // Brand new code for posting new category
   app.post("/api/category", (req, res) => {
     if (!req.user) {
       res.json({});
     } else {
       db.BudgetCategory.create({
->>>>>>> d6f606f000d930dfe14a5d7ffb9b9de2ca673645
         desc: req.body.desc,
         UserId: req.user.id
       }).then(budgetCategory => {
@@ -165,46 +99,17 @@ module.exports = function(app) {
           desc: req.body.desc
         },
         {
-<<<<<<< HEAD
-          where: { id: req.body.id }
-        }
-      ).then(BudgetCategory => {
-        res.json(BudgetCategory);
-=======
           where: {
             id: req.body.id,
             UserId: req.user.id // Restrict only user to modify their own custom category
           }
         }
-      ).then((budgetCategory) => {
+      ).then(budgetCategory => {
         res.json(budgetCategory);
->>>>>>> d6f606f000d930dfe14a5d7ffb9b9de2ca673645
       });
     }
   });
 
-<<<<<<< HEAD
-  // Code for PUT, updating a line item
-  app.put("/api/lineitem", (req, res) => {
-    if (!req.user) {
-      res.json({});
-    } else {
-      db.BudgetLineItem.update(
-        {
-          desc: req.body.desc,
-          vendor: req.body.vendor,
-          estimated_cost: req.body.estimated_cost,
-          actual_cost: req.body.actual_cost
-        },
-        {
-          where: { BudgetCategoryId: req.body.BudgetCategoryId }
-        }
-      ).then(BudgetLineItem => {
-        res.json(BudgetLineItem);
-      });
-    }
-  });
-=======
   // Posting a new line item
   app.post("/api/lineitem", (req, res) => {
     if (!req.user) {
@@ -217,7 +122,7 @@ module.exports = function(app) {
         actual_cost: req.body.actual_cost,
         BudgetCategoryId: req.body.BudgetCategoryId,
         UserId: req.user.id
-      }).then((budgetLineItem) => {
+      }).then(budgetLineItem => {
         res.json(budgetLineItem);
       });
     }
@@ -241,10 +146,9 @@ module.exports = function(app) {
             UserId: req.user.id // Restrict only user to modify their own budget line item
           }
         }
-      ).then((budgetLineItem) => {
+      ).then(budgetLineItem => {
         res.json(budgetLineItem);
       });
     }
   });
->>>>>>> d6f606f000d930dfe14a5d7ffb9b9de2ca673645
 };
