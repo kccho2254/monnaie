@@ -37,10 +37,11 @@ module.exports = function(sequelize, DataTypes) {
       null
     );
   });
+
   User.associate = function (models){
-    User.hasMany(models.BudgetCategory, {
-      onDelete: "cascade"
-    })
-  }
+    models.User.hasMany(models.BudgetCategory);
+    models.User.hasMany(models.BudgetLineItem);
+  };
+
   return User;
 };
