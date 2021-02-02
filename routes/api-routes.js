@@ -50,7 +50,7 @@ module.exports = function(app) {
         where: {
           id: req.user.id
         },
-        include: [db.BudgetCategory, db.BudgetLineItem, db.Tasks],
+        include: [db.BudgetCategory, db.BudgetLineItem],
         attributes: {
           exclude: ["password"]
         }

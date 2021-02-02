@@ -35,4 +35,8 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/tasks.html"));
   });
 
+  app.get("/chart", isAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/chart.html"));
+  });
+
 };
