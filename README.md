@@ -27,3 +27,13 @@ $ git pull origin main
     $ git push --delete origin <branch-name>
 Delete locally
     $ git branch -D <branch-name> -->
+
+Add "name" to database
+Make id's update so that the first is 1, second is 2, etc.
+Make Budget Categories appear on api/user_data
+    "
+    const getDefaultCategories = require("../data/default-categories");
+    const BudgetCategory = sequelize.define('BudgetCategory', {
+    "
+
+Test put routes
