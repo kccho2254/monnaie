@@ -50,7 +50,7 @@ module.exports = function(app) {
         where: {
           id: req.user.id
         },
-        include: [db.BudgetCategory, db.BudgetLineItem],
+        include: [db.BudgetCategory, db.BudgetLineItem, db.Tasks],
         attributes: {
           exclude: ["password"]
         }
@@ -148,6 +148,22 @@ module.exports = function(app) {
         }
       ).then(budgetLineItem => {
         res.json(budgetLineItem);
+      });
+    }
+  });
+
+  // Posting a new task
+  app.post("/api/tasks", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.Task.create({
+        taskDesc: req.body.taskDesc,
+        dueDate: req.body.datepicker,
+        completed: false,
+        UserId: req.user.id
+      }).then(task => {
+        res.json(task);
       });
     }
   });
