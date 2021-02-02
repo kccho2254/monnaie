@@ -20,12 +20,12 @@ module.exports = function(app) {
   app.post("/api/signup", (req, res) => {
     db.User.create({
       email: req.body.email,
-      password: req.body.password,
+      password: req.body.password
     })
       .then(() => {
         res.redirect(307, "/api/login");
       })
-      .catch((err) => {
+      .catch(err => {
         res.status(401).json(err);
       });
   });
@@ -54,7 +54,7 @@ module.exports = function(app) {
         attributes: {
           exclude: ["password"]
         }
-      }).then((user) => {
+      }).then(user => {
         res.json(user);
       });
     }
@@ -104,7 +104,7 @@ module.exports = function(app) {
             UserId: req.user.id // Restrict only user to modify their own custom category
           }
         }
-      ).then((budgetCategory) => {
+      ).then(budgetCategory => {
         res.json(budgetCategory);
       });
     }
@@ -122,7 +122,7 @@ module.exports = function(app) {
         actual_cost: req.body.actual_cost,
         BudgetCategoryId: req.body.BudgetCategoryId,
         UserId: req.user.id
-      }).then((budgetLineItem) => {
+      }).then(budgetLineItem => {
         res.json(budgetLineItem);
       });
     }
@@ -146,7 +146,7 @@ module.exports = function(app) {
             UserId: req.user.id // Restrict only user to modify their own budget line item
           }
         }
-      ).then((budgetLineItem) => {
+      ).then(budgetLineItem => {
         res.json(budgetLineItem);
       });
     }
