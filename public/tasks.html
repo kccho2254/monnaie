@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/style.css" type="text/css" />     <title>Tasks</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="./js/tasks.js"></script>
+</head>
+<body>
+    <div id="task-list">
+        <h2>Tasks that still need to be completed</h2>
+        <ul id="incomplete">
+            <li>task a</li>
+            <button class="change-completed">Complete</button>
+            <button class="edit">Edit</button>
+        </ul>
+        <h2>Completed Tasks</h2>
+        <ul id="complete">
+            <li>task b</li>
+            <button>Delete</button>
+        </ul>
+    </div>
+    <div id="adder">
+        <div id="container">
+            <h2>Add a task</h2>
+            <form class="create-form">
+                <div class="form-group">
+                    <label for="ta">Task:</label>
+                    <textarea id="ta" name="taskDesc"></textarea>
+                </div>
+                <p>Due Date: <input type="date" id="datepicker"></p>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
