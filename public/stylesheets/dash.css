@@ -1,0 +1,12 @@
+.userAvatar {
+  margin-left: 50px;
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+}
+
+aside {
+  background-color: whitesmoke;
+}

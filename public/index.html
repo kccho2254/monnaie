@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <title>Landing Page</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+            <a class="navbar-item" href=""
+                style="font-family: 'Berkshire Swash', cursive; text-align: center; color: #e17055;">
+                Ritzy
+            </a>
+        </div>
+    </header>
+    <div class="card">
+        <div class="card-image">
+            <figure>
+                <img src="./images/confetti.jpg" alt="Placeholder image">
+            </figure>
+            <div class="container">
+                <div class="bottom-left">
+                    <div class="field">
+                        <label class="label" style="float: left; color: #2f3640;">NAME</label>
+                        <div class="control">
+                            <input class="input" id="email-input" type="text" placeholder="Grace Kelly">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" style="float: left; color: #2f3640;">EMAIL</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="email" placeholder="Email input" value="name@email.com">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link"
+                                style="color: whitesmoke; background-color: #e17055;">SIGN-UP</button>
+                        </div>
+                        <div class="control">
+                            <button class="button is-link is-light"
+                                style="color: whitesmoke; background-color: #f7bda4;">CANCEL</button>
+                        </div>
+                    </div>
+                    <p style="color: #2f3640;">Already a Ritzy user? <a href="/login">Login!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/dollar.png" alt=""></p>
+            <p class="subtitle is-5">Budget</p>
+        </div>
+        <div class="column">
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/clipboard.png" alt=""></p>
+            <p class="subtitle is-5">Checklist</p>
+        </div>
+        <div class="column">
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/analytics.png" alt=""></p>
+            <p class="subtitle is-5">Estimate</p>
+        </div>
+        <div class="column">
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/analytics.png" alt=""></p>
+            <p class="subtitle is-5">Vendors</p>
+        </div>
+    </div>
+   
+</body>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/signup.js"></script>
+</html>
