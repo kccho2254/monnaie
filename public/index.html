@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <title>Landing Page</title>
     <!-- Google Fonts -->
@@ -28,14 +28,14 @@
     <div class="card">
         <div class="card-image">
             <figure>
-                <img src="confetti.jpg" alt="Placeholder image">
+                <img src="./images/confetti.jpg" alt="Placeholder image">
             </figure>
             <div class="container">
                 <div class="bottom-left">
                     <div class="field">
                         <label class="label" style="float: left; color: #2f3640;">NAME</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Grace Kelly">
+                            <input class="input" id="email-input" type="text" placeholder="Grace Kelly">
                         </div>
                     </div>
 
@@ -60,29 +60,32 @@
                                 style="color: whitesmoke; background-color: #f7bda4;">CANCEL</button>
                         </div>
                     </div>
-                    <p style="color: #2f3640;">Already a Ritzy user? <a href="">Login!</a></p>
+                    <p style="color: #2f3640;">Already a Ritzy user? <a href="/login">Login!</a></p>
                 </div>
             </div>
         </div>
     </div>
     <div class="columns">
         <div class="column">
-            <p class="title is-3 is-spaced"><img id="icon" src="./dollar.png" alt=""></p>
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/dollar.png" alt=""></p>
             <p class="subtitle is-5">Budget</p>
         </div>
         <div class="column">
-            <p class="title is-3 is-spaced"><img id="icon" src="./clipboard.png" alt=""></p>
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/clipboard.png" alt=""></p>
             <p class="subtitle is-5">Checklist</p>
         </div>
         <div class="column">
-            <p class="title is-3 is-spaced"><img id="icon" src="./analytics.png" alt=""></p>
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/analytics.png" alt=""></p>
             <p class="subtitle is-5">Estimate</p>
         </div>
         <div class="column">
-            <p class="title is-3 is-spaced"><img id="icon" src="./analytics.png" alt=""></p>
+            <p class="title is-3 is-spaced"><img id="icon" src="./images/analytics.png" alt=""></p>
             <p class="subtitle is-5">Vendors</p>
         </div>
     </div>
+   
 </body>
-
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/signup.js"></script>
 </html>

@@ -1,35 +1,33 @@
-
-
 module.exports = function(sequelize, DataTypes) {
-  const BudgetLineItem = sequelize.define('BudgetLineItem', {
+  const BudgetLineItem = sequelize.define("BudgetLineItem", {
     desc: {
       type: DataTypes.STRING,
       allowNull: false
     },
     vendor: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     estimated_cost: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     actual_cost: {
-        type: DataTypes.INTEGER,
-        allowNull: true
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   });
 
   BudgetLineItem.associate = function(models) {
     models.BudgetLineItem.belongsTo(models.BudgetCategory, {
-      onDelete: 'CASCADE',
+      onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
     });
 
     models.BudgetLineItem.belongsTo(models.User, {
-      onDelete: 'CASCADE',
+      onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
