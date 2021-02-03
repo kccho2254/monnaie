@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <title>Landing Page</title>
     <!-- Google Fonts -->
@@ -21,7 +22,7 @@
             <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
             <a class="navbar-item" href=""
                 style="font-family: 'Berkshire Swash', cursive; text-align: center; color: #e17055;">
-                Ritzy
+                Monnaie
             </a>
         </div>
     </header>
@@ -30,14 +31,56 @@
             <figure>
                 <img src="confetti.jpg" alt="Placeholder image">
             </figure>
-            <div class="container">
-                <div class="bottom-left">
-                    <h4 style="color: black;">Welcome to Ritzy!</h4>
-
+        </div>
+    </div>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1 id="text">Create Account</h1>
+                <br>
+                <input type="text" placeholder="Name" />
+                <br>
+                <input type="email" placeholder="Email" />
+                <br>
+                <input type="password" placeholder="Password" />
+                <br>
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1 id="text">Sign In</h1>
+                <br>
+                <input type="email" placeholder="Email" />
+                <br>
+                <input type="password" placeholder="Password" />
+                <a href="#">Forgot your password?</a>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <br>
+                    <p>
+                        Sign-in to view your budget summary.
+                    </p>
+                    <br>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Not a Ritzy user?</h1>
+                    <br>
+                    <p>Let's change that!</p>
+                    <br>
+                    <button class="ghost" id="signUp">Sign Up</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="login.js"></script>
     <div class="columns" id="center">
         <div class="column">
             <p class="title is-3 is-spaced"><img id="icon" src="./dollar.png" alt=""></p>
@@ -56,11 +99,6 @@
             <p class="subtitle is-5">Estimate</p>
             <p>We know creating wedding budgets can be overwhelming and tend to change, this is why we provide estimates
                 for budgeted items to keep track of your goal budget.</p>
-        </div>
-        <div class="column">
-            <p class="title is-3 is-spaced"><img id="icon" src="./analytics.png" alt=""></p>
-            <p class="subtitle is-5">Vendors</p>
-
         </div>
     </div>
     <footer class="footer">
