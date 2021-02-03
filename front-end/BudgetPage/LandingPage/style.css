@@ -15,18 +15,6 @@ body {
   color: white;
 }
 
-.bottom-left {
-  background-color: whitesmoke;
-  border-radius: 5%;
-  opacity: 90%;
-  padding: 80px;
-  margin-bottom: 200px;
-  margin-left: -150px;
-  position: absolute;
-  bottom: 8px;
-  left: 16px;
-}
-
 .centered {
   color: whitesmoke;
   position: absolute;
@@ -58,7 +46,9 @@ body {
 
 .subtitle.is-5 {
   background-color: #f5f6fa;
-  margin-left: 300px;
+  margin-left: 280px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
 }
 
 .button {
@@ -66,5 +56,11 @@ body {
 }
 
 .center {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
+  margin: 45px;
+}
+
+.border-right {
+  border-right: 1px solid black;
 }
