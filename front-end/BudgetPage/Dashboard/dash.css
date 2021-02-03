@@ -1,6 +1,9 @@
 .userAvatar {
   margin-top: 20px;
   margin-left: 80px;
+  border-style: solid;
+  border-radius: 100%;
+  border-color: black;
 }
 
 .chart {
