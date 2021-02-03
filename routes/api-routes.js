@@ -66,15 +66,19 @@ module.exports = function(app) {
           exclude: ["password"]
         }
       }).then(user => {
+
         // this will add up all of the budget line items within each category to get the
         // estimated total cost for the user 
-        let estimatedTotalCost = 0
+        user.estimatedTotalCost = 0
+        let actualTotalCost = 0
         user.BudgetCategories.forEach(category => {
           category.BudgetLineItems.forEach(line => {
-            estimatedTotalCost += parseFloat(line.estimated_cost)
+            user.estimatedTotalCost += line.estimated_cost
+            actualTotalCost += line.actual_cost
+            user.setDataValue('actualTotalCost', actualTotalCost);
           })
         })
-        user.estimatedTotalCost = estimatedTotalCost
+
         res.json(user);
       });
     }
@@ -180,10 +184,10 @@ module.exports = function(app) {
     } else {
       db.BudgetLineItem.update(
         {
-          // desc: req.body.desc,
-          // vendor: req.body.vendor,
+          desc: req.body.desc,
+          vendor: req.body.vendor,
           estimated_cost: req.body.estimated_cost,
-          // actual_cost: req.body.actual_cost
+          actual_cost: req.body.actual_cost
         },
         {
           where: {
