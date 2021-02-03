@@ -56,11 +56,12 @@ function updateLine(event) {
     // <input line-estimated-cost update-line value="${line.estimated_cost}" class="input is-rounded is-small" style="width:200px" type="number" min="0.00" step="1.00" placeholder="Estimated Amount">
     // <input line-actual-cost update-line value="${line.actual_cost}" class="input is-rounded is-small" style="width:200px" type="number" min="0.00" step="1.00" placeholder="Actual Amount">
     // </div>
-    let id = event.target.parentElement.getAttribute('line-id')
-    let desc = event.target.parentElement.querySelector('[line-desc]').value
-    let vendor = event.target.parentElement.querySelector('[line-vendor]').value
-    let estimated_cost = event.target.parentElement.querySelector('[line-estimated-cost]').value
-    let actual_cost = event.target.parentElement.querySelector('[line-actual-cost]').value
+    let line = event.target.parentElement.parentElement.parentElement
+    let id = line.getAttribute('line-id')
+    let desc = line.children[0].children[0].children[0].value
+    let vendor = line.children[1].children[0].children[0].value
+    let estimated_cost = line.children[2].children[0].children[0].value
+    let actual_cost = line.children[3].children[0].children[0].value
     $.ajax({
         url: "/api/lineitem/" + id,
         type: "PUT",
@@ -163,8 +164,17 @@ function renderBudget() {
                         <tr>
                             <td class="is-flex is-justify-content-space-between is-align-items-center">
                                 <div line-id="${line.id}" class="is-flex is-align-items-center">
-                                    <input line-desc update-line value="${line.desc}" class="input is-rounded mr-1" style="width:500px" type="text" placeholder="Your Budget Line Item">
-                                    <input line-vendor update-line value="${line.vendor}" class="input is-rounded is-small mr-1" style="width:400px" type="text" placeholder="Vendor">
+                                    <span>
+                                        <span>
+                                            <input line-desc update-line value="${line.desc}" class="input is-rounded mr-1" style="width:500px" type="text" placeholder="Your Budget Line Item">
+                                        </span>
+                                    </span>
+
+                                    <span>
+                                        <span>
+                                            <input line-vendor update-line value="${line.vendor}" class="input is-rounded is-small mr-1" style="width:400px" type="text" placeholder="Vendor">
+                                        </span>
+                                    </span>
                                     
                                     <div class="field mb-0">
                                         <p class="control has-icons-left">
