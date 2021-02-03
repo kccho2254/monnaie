@@ -1,5 +1,5 @@
 let labels = [];
-const estimated = [];
+let estimated = [];
 let actual = [];
 let myChart;
 
@@ -47,7 +47,7 @@ ctx.canvas.height = 600;
 
 const chart = new Chart(ctx, config);
 
-$.get("/api/user_data").then((json) => { // get api/default_categories
+$.get("/api/user_data").then((json) => { 
     json.BudgetCategories.forEach(e => {
         labels.push(e.desc);
     });
