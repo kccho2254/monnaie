@@ -1,11 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
     const Task = sequelize.define("Task", {
-      task_desc: {
+      taskDesc: {
         type: DataTypes.STRING,
         allowNull: false
         },
       dueDate: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false
       },
       completed: {
