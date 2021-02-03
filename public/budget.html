@@ -4,36 +4,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./budget.css">
     <!---- BULMA ---->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <!--Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <title>Ritzy | Budget</title>
+    <title>Monnaie | Budget</title>
 </head>
 
 <body>
+
+    <div id="category-form" class="modal">
+        <div hide-category-form class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add a Category</p>
+                <button hide-category-form class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <input id="category-form-desc" class="input" placeholder="Description">
+            </section>
+            <footer class="modal-card-foot">
+                <button add-category class="button is-success">Save</button>
+                <button hide-category-form class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+    <div id="lineitem-form" class="modal ">
+        <div hide-lineitem-form class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add a Line Item for <span id="lineitem-form-category-desc"></span></p>
+                <button hide-lineitem-form class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <input id="lineitem-form-desc" class="input" placeholder="Description">
+                <input id="lineitem-form-vendor" class="input" placeholder="Vendor">
+                <input id="lineitem-form-estimated-cost" class="input" placeholder="Estimated Cost">
+                <input id="lineitem-form-actual-cost" class="input" placeholder="Actual Cost">
+            </section>
+            <footer class="modal-card-foot">
+                <button add-line id="lineitem-form-save" class="button is-success">Save</button>
+                <button hide-lineitem-form class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
     <header>
         <div>
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
-            <a class="navbar-item" href="/"
+            <a class="is-justify-content-center navbar-item mb-6" href="/"
                 style="font-family: 'Berkshire Swash', cursive; font-size: 50px; color: #e17055;">
                 Monnaie
             </a>
+            <div class="is-flex is-justify-content-center">
+                <div class="card mr-2 has-background-primary-light">
+                    <div class="card-header">
+                        <p class="card-header-title">
+                            Estimated Costs Total:
+                        </p>
+                    </div>
+                    <div class="card-content is-flex is-justify-content-center" id="total-estimated-cost">
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+                <div class="card ml-2 has-background-info-light">
+                    <div class="card-header pr-3 pl-3">
+                        <p class="card-header-title">
+                            Actual Costs Total:
+                        </p>
+                    </div>
+                    <div class="card-content is-flex is-justify-content-center" id="total-actual-cost">
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+                <!-- <span class="pr-2">Total Estimated Cost: <span id="total-estimated-cost"></span> </span> -->
+                <!-- <span class="pl-2">Total Actual Cost: <span id="total-actual-cost"></span> </span> -->
+            </div>
         </div>
     </header>
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-        <!--- VENUE ---->
-        <thead>
-            <!--- Add Budget Item Button ---->
-            <button class="button is-success is-outlined" id="top"> Add Budget Item </button>
-            <button class="button is-info is-outlined" id="top"> Add Category</button>
-            <!--- Choose Category Dropdown --->
-            <!---- CATEGORY DROP DOWN FOR USER INPUT ----->
-            <div class="dropdown is-hoverable">
+    <button show-category-form class="button is-info is-outlined ml-2 mb-2" id="top"> Add Category</button>
+    <!-- <button class="button is-success is-outlined ml-2" id="top"> Add Budget Item </button> -->
+
+    <table id="categories" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <!-- <thead>
+
+            <button class="button is-info is-outlined ml-2" id="top"> Add Category</button>
+            <button class="button is-success is-outlined ml-2" id="top"> Add Budget Item </button>
+            
+            <tr>
+                <th class="is-flex is-justify-content-space-between" style="background-color:#fab1a0; color: white;">Venue<button class="button"> + </button></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="is-flex is-justify-content-space-between is-align-items-center">
+                    <div class="is-flex is-align-items-center">
+                    <input class="input is-rounded mr-1" style="width:500px" type="text" placeholder="Your Budget Line Item">
+                    <input class="input is-rounded is-small mr-1" style="width:400px" type="text" placeholder="Vendor">
+                    <input class="input is-rounded is-small" style="width:200px" type="text" placeholder="Estimated Amount">
+                    <input class="input is-rounded is-small" style="width:200px" type="text" placeholder="Actual Amount">
+                    </div>
+                    <button class="delete is-medium ml-2"></button>
+                </td>
+            </tr>
+            <hr>
+            <tr>
+            </tr>
+
+        </tbody> -->
+
+    </table>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Copyright © 2021 Monnaie</strong>
+            <p>Contributors: Kevin Cho, Chad Cook, Katie Cowan, and Charli Spilecki</p>
+            </p>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dinero.js"></script>
+    <script src="./js/budget.js"></script>
+</body>
+
+</html>
+
+
+<!--- Choose Category Dropdown --->
+<!---- CATEGORY DROP DOWN FOR USER INPUT ----->
+<!-- <div class="dropdown is-hoverable">
                 <div class="dropdown-trigger">
                     <button class="button" id="top" aria-haspopup="true" aria-controls="dropdown-menu4">
                         <span>Category</span>
@@ -117,358 +223,5 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!---- END OF DROP DOWN FOR USER INPUT CODE ----->
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Venue</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-            <hr>
-            <tr>
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-
-        </tbody>
-        <!---- RINGS ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Rings</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- ENTERTAINMENT ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Music & Entertainment</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- CATERING ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Catering</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- DRINKS AND ALCOHOL --->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Drinks</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!---- EVENT STAFF ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Event Staff</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- INVITATIONS ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Invitations</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- WEDDING COUPLE OUTFITS-->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Wedding Couple Outfits & Alterations</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!---- WEDDING PARTY OUTFITS ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Wedding Party Outfits</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- HAIR AND MAKEUP --->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Hair & Make-up</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- RENTALS ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Rentals</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- GIFTS ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Gifts</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- FLORALS ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Florals</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!--- PHOTO AND VIDEO ---->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Photographer & Videographer</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <!-- DECORATIONS --->
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Decorations</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Wedding Planner</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Officiant</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Transportation</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Hotel</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Wedding Favors</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Tips for Vendors</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Honeymoon</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th style="background-color:#fab1a0; color: white;">Other</th>
-                <th><button class="button"> + </button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <!-- <td>Cost</td>
-                <td>Actual</td> -->
-                <td><button class="delete is-small"></button></td>
-            </tr>
-        </tbody>
-    </table>
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>
-                <strong>Copyright © 2020 Served</strong>
-            <p>Contributors: Kevin Cho, Chad Cook, Katie Cowan, and Charli Spilecki</p>
-            </p>
-        </div>
-    </footer>
-</body>
-
-</html>
+            </div> -->
+<!---- END OF DROP DOWN FOR USER INPUT CODE ----->
