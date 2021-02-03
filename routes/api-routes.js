@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const defaultCategories = require('../data/default-categories')
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -20,7 +21,11 @@ module.exports = function(app) {
   app.post("/api/signup", (req, res) => {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      BudgetCategories: defaultCategories
+    }, 
+    {
+      include: [db.BudgetCategory]
     })
       .then(() => {
         res.redirect(307, "/api/login");
@@ -50,12 +55,50 @@ module.exports = function(app) {
         where: {
           id: req.user.id
         },
-        include: [db.BudgetCategory, db.BudgetLineItem],
+        // include: [db.BudgetCategory],
+        include: [
+          {
+          model: db.BudgetCategory, 
+          include: [db.BudgetLineItem]
+        },
+      ],
         attributes: {
           exclude: ["password"]
         }
       }).then(user => {
+        // this will add up all of the budget line items within each category to get the
+        // estimated total cost for the user 
+        let estimatedTotalCost = 0
+        user.BudgetCategories.forEach(category => {
+          category.BudgetLineItems.forEach(line => {
+            estimatedTotalCost += parseFloat(line.estimated_cost)
+          })
+        })
+        user.estimatedTotalCost = estimatedTotalCost
         res.json(user);
+      });
+    }
+  });
+
+  app.get("/api/tasks", (req, res) => {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      db.User.findOne({
+        where: {
+          id: req.user.id
+        },        
+        include: db.Task,
+        attributes: {
+          exclude: ["password"]
+        }
+      }).then(user => {
+        console.log(user);
+        // user.Tasks.forEach(
+          
+        // )
+        res.json(user.Tasks);
       });
     }
   });
@@ -75,7 +118,7 @@ module.exports = function(app) {
     }
   });
 
-  // Brand new code for posting new category
+  // Code for POST, posting new category
   app.post("/api/category", (req, res) => {
     if (!req.user) {
       res.json({});
@@ -129,21 +172,23 @@ module.exports = function(app) {
   });
 
   // Code for PUT, updating a line item
-  app.put("/api/lineitem", (req, res) => {
+  app.put("/api/lineitem/:id", (req, res) => {
+    console.log('req.body.estimated_cost: ' + req.body.estimated_cost)
+    console.log('req.params.id: ' + req.params.id)
     if (!req.user) {
       res.json({});
     } else {
       db.BudgetLineItem.update(
         {
-          desc: req.body.desc,
-          vendor: req.body.vendor,
+          // desc: req.body.desc,
+          // vendor: req.body.vendor,
           estimated_cost: req.body.estimated_cost,
-          actual_cost: req.body.actual_cost
+          // actual_cost: req.body.actual_cost
         },
         {
           where: {
-            BudgetCategoryId: req.body.BudgetCategoryId,
-            UserId: req.user.id // Restrict only user to modify their own budget line item
+            id: req.params.id,
+            // UserId: req.user.id // Restrict only user to modify their own budget line item
           }
         }
       ).then(budgetLineItem => {
@@ -151,4 +196,48 @@ module.exports = function(app) {
       });
     }
   });
+
+  // Posting a new task
+  app.post("/api/tasks", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.Task.create({
+        taskDesc: req.body.taskDesc,
+        dueDate: req.body.dueDate,
+        completed: false,
+        UserId: req.user.id
+      }).then(task => {
+        res.json(task);
+      });
+    }
+  });
+
+  // Delete category
+  app.delete("/api/category/:id", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetCategory.destroy({
+        where: {id: req.params.id}
+      }).then(task => {
+        res.json(task);
+      });
+    }
+  });
+
+  // Delete lineitem
+  app.delete("/api/lineitem/:id", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.BudgetLineItem.destroy({
+        where: {id: req.params.id}
+      }).then(task => {
+        res.json(task);
+      });
+    }
+  });
+
+
 };

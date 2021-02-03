@@ -31,9 +31,35 @@ Delete locally
 Add "name" to database
 Make id's update so that the first is 1, second is 2, etc.
 Make Budget Categories appear on api/user_data
-    "
-    const getDefaultCategories = require("../data/default-categories");
-    const BudgetCategory = sequelize.define('BudgetCategory', {
-    "
-
+    Let users pick and choose their own default categories to add to Budget Categories
 Test put routes
+
+Default wedding categories
+Add custom wedding categories
+Add budget line item
+
+Budget Line Item must have the category ID corresponding to Budget Categories (which must be populated by either new budget catgories or existing preset categories)
+
+
+Estimated budget
+    what you want to spend
+
+Actual budget
+    what you end up spending
+
+    Add a category
+        delete button
+        edit button
+    Add a budget item
+        delete button
+        edit button
+
+When you add a budget line item you have to select a budget category which has a foreign key to categories
+
+Budget Category
+    List of budget line items
+
+
+Line is the actual estimate
+
+Bar is the estimated/expected cost

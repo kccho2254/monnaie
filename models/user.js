@@ -41,6 +41,7 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function (models){
     models.User.hasMany(models.BudgetCategory);
     models.User.hasMany(models.BudgetLineItem);
+    models.User.hasMany(models.Task);
   };
 
   return User;
