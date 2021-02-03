@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./budget.css">
     <!---- BULMA ---->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Google Fonts -->
@@ -21,22 +21,119 @@
             <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
             <a class="navbar-item" href=""
                 style="font-family: 'Berkshire Swash', cursive; font-size: 50px; color: #e17055;">
-                Ritzy
+                Monnaie
             </a>
         </div>
     </header>
-    <table class="table">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <!--- VENUE ---->
         <thead>
+            <!--- Add Budget Item Button ---->
+            <button class="button is-success is-outlined" id="top"> Add Budget Item </button>
+            <button class="button is-info is-outlined" id="top"> Add Category</button>
+            <!--- Choose Category Dropdown --->
+            <!---- CATEGORY DROP DOWN FOR USER INPUT ----->
+            <div class="dropdown is-hoverable">
+                <div class="dropdown-trigger">
+                    <button class="button" id="top" aria-haspopup="true" aria-controls="dropdown-menu4">
+                        <span>Category</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <a href="" class="dropdown-item">
+                                Venue
+                            </a>
+                            <a class="dropdown-item">
+                                Rings
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Music & Entertainment
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Catering
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Drinks & Alcohol
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Event Staff
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Invitations
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Wedding Couple Outfits
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Wedding Party Outfits
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Hair & Make-up
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Rentals
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Gifts
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Florals
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Photographer & Video
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Decorations
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Wedding Planner
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Officiant
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Transportation
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Hotel
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Wedding Favors
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Tips for vendors
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Honeymoon
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                Other
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---- END OF DROP DOWN FOR USER INPUT CODE ----->
             <tr>
-                <th>Venue</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Venue</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
+                <td><button class="delete is-small"></button></td>
+            </tr>
+            <hr>
+            <tr>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
 
@@ -44,322 +141,322 @@
         <!---- RINGS ---->
         <thead>
             <tr>
-                <th>Rings</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Rings</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- ENTERTAINMENT ---->
         <thead>
             <tr>
-                <th>Music & Entertainment</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Music & Entertainment</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- CATERING ---->
         <thead>
             <tr>
-                <th>Catering</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Catering</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- DRINKS AND ALCOHOL --->
         <thead>
             <tr>
-                <th>Drinks</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Drinks</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!---- EVENT STAFF ---->
         <thead>
             <tr>
-                <th>Event Staff</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Event Staff</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- INVITATIONS ---->
         <thead>
             <tr>
-                <th>Invitations</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Invitations</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- WEDDING COUPLE OUTFITS-->
         <thead>
             <tr>
-                <th>Wedding Couple Outfits & Alterations</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Wedding Couple Outfits & Alterations</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!---- WEDDING PARTY OUTFITS ---->
         <thead>
             <tr>
-                <th>Wedding Party Outfits</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Wedding Party Outfits</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- HAIR AND MAKEUP --->
         <thead>
             <tr>
-                <th>Hair & Make-up</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Hair & Make-up</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- RENTALS ---->
         <thead>
             <tr>
-                <th>Rentals</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Rentals</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- GIFTS ---->
         <thead>
             <tr>
-                <th>Gifts</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Gifts</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- FLORALS ---->
         <thead>
             <tr>
-                <th>Florals</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Florals</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!--- PHOTO AND VIDEO ---->
         <thead>
             <tr>
-                <th>Photographer & Videographer</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Photographer & Videographer</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <!-- DECORATIONS --->
         <thead>
             <tr>
-                <th>Decorations</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Decorations</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Wedding Planner</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Wedding Planner</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Officiant</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Officiant</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Transportation</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Transportation</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Hotel</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Hotel</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Wedding Favors</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Wedding Favors</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Tips for Vendors</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Tips for Vendors</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Honeymoon</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Honeymoon</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th>Other</th>
-                <th><button class="button" style="font-size: 20px;"> + </button></th>
+                <th style="background-color:#fab1a0; color: white;">Other</th>
+                <th><button class="button"> + </button></th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
-                <td>Cost</td>
-                <td>Actual</td>
+                <!-- <td>Cost</td>
+                <td>Actual</td> -->
                 <td><button class="delete is-small"></button></td>
             </tr>
         </tbody>
