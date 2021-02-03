@@ -59,18 +59,20 @@ $.get("/api/user_data").then((json) => {
     json.BudgetCategories.forEach((e) => {
         e.BudgetLineItems.forEach((a) => {
             console.log(a.BudgetCategoryId)
+            for (i = 0; i < json.BudgetCategories.length; i++) {
+                // for however many budget categories there are, filter each budgetlineitem by estimated_cost, reduce() the numbers together, push to estimated[]
+                console.log(e.BudgetLineItems);
+                // var idArray = e.BudgetLineItems[i].filter((el) => {
+                //     return el.estimated_cost.reduce();
+
+                // });
+                // console.log(idArray);
+
+                // estimated.push(idArray);
+            }
+            return;
         });
     });
-    for (i = 0; i < json.BudgetCategories.length; i++) {
-        // for however many budget categories there are, filter each budgetlineitem by estimated_cost, reduce() the numbers together, push to estimated[]
-        var idArray = BudgetLineItems[i].filter((e) => {
-            return estimated_cost.reduce();
-
-        });
-        console.log(idArray);
-
-        estimated.push(idArray);
-    }
 });
 
 
