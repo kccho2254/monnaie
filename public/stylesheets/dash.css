@@ -12,3 +12,12 @@ aside {
   height: 1280px!important;
   width: 720px;
 }
+a.is-active.is-hovered,
+a.is-active:hover{
+  background-color: grey!important;
+}
+a.is-outlined.is-hovered,
+a.is-outlined:hover{
+  background-color: tomato!important;
+  color: linen!important;
+}
