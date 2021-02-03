@@ -75,9 +75,9 @@ module.exports = function(app) {
           category.BudgetLineItems.forEach(line => {
             user.estimatedTotalCost += line.estimated_cost
             actualTotalCost += line.actual_cost
-            user.setDataValue('actualTotalCost', actualTotalCost);
           })
         })
+        user.setDataValue('actualTotalCost', actualTotalCost);
 
         res.json(user);
       });

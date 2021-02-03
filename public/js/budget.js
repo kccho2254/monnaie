@@ -30,12 +30,18 @@ function addLine(event) {
     //         <input id="lineitem-form-vendor" class="input" placeholder="Vendor">
     //         <input id="lineitem-form-estimated-cost" class="input" placeholder="Estimated Cost">
           
+    let estimatedCost = document.querySelector('#lineitem-form-estimated-cost').value
+    let actualCost = document.querySelector('#lineitem-form-actual-cost').value
+    if (!estimatedCost || isNaN(estimatedCost) || !actualCost || isNaN(actualCost)) {
+        alert('Costs must be numbers')
+        return
+    }
     let categoryId = event.target.getAttribute('category-id')
     $.post("/api/lineitem", {
         desc: document.querySelector('#lineitem-form-desc').value,
         vendor: document.querySelector('#lineitem-form-vendor').value,
         estimated_cost: parseFloat(document.querySelector('#lineitem-form-estimated-cost').value),
-        actual_cost: 10000,
+        actual_cost: parseFloat(document.querySelector('#lineitem-form-actual-cost').value),
         BudgetCategoryId: categoryId
     }).then(() => {
         hideLineItemForm()
@@ -100,6 +106,7 @@ function hideLineItemForm(event) {
     document.querySelector('#lineitem-form-desc').value = ''
     document.querySelector('#lineitem-form-vendor').value = ''
     document.querySelector('#lineitem-form-estimated-cost').value = ''
+    document.querySelector('#lineitem-form-actual-cost').value = ''
 }
 
 // For the entire page, there is an event listener for clicks. Each "if" statement
@@ -138,10 +145,18 @@ function renderBudget() {
         document.querySelector('#total-estimated-cost').innerHTML = Dinero({ amount: user.estimatedTotalCost*100 }).toFormat('$0,0.00')
         document.querySelector('#total-actual-cost').innerHTML = Dinero({ amount: user.actualTotalCost*100}).toFormat('$0,0.00')
         let categoriesHTML = ''
-        user.BudgetCategories.forEach(category => {
+        user.BudgetCategories.forEach((category, index) => {
             let categoryId = category.id
             let categoryDesc = category.desc
             let lineItemsHTML = ''
+            let categoryColor
+            if (index % 2 === 0) {
+                // Even rows
+                categoryColor = "FFB7B2"
+            } else {
+                // Odd rows
+                categoryColor = "FFECF5" 
+            }
             if (category.BudgetLineItems) {
                 category.BudgetLineItems.forEach(line => {
                     lineItemsHTML += `
@@ -150,8 +165,24 @@ function renderBudget() {
                                 <div line-id="${line.id}" class="is-flex is-align-items-center">
                                     <input line-desc update-line value="${line.desc}" class="input is-rounded mr-1" style="width:500px" type="text" placeholder="Your Budget Line Item">
                                     <input line-vendor update-line value="${line.vendor}" class="input is-rounded is-small mr-1" style="width:400px" type="text" placeholder="Vendor">
-                                    <input line-estimated-cost update-line value="${line.estimated_cost}" class="input is-primary has-background-primary-light is-rounded is-small" style="width:200px" type="number" min="0.00" step="1.00" placeholder="Estimated Amount">
-                                    <input line-actual-cost update-line value="${line.actual_cost}" class="input is-info has-background-info-light is-rounded is-small" style="width:200px" type="number" min="0.00" step="1.00" placeholder="Actual Amount">
+                                    
+                                    <div class="field mb-0">
+                                        <p class="control has-icons-left">
+                                        <input line-estimated-cost update-line value="${line.estimated_cost}" class="input is-primary has-background-primary-light is-rounded is-small" style="width:200px" type="number" min="0.00" step="1.00" placeholder="Estimated Amount">
+                                            <span class="icon is-small is-left">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <p class="control has-icons-left">
+                                        <input line-actual-cost update-line value="${line.actual_cost}" class="input is-info has-background-info-light is-rounded is-small" style="width:200px" type="number" min="0.00" step="1.00" placeholder="Actual Amount">
+                                            <span class="icon is-small is-left">
+                                            <i class="fas fa-dollar-sign"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+
                                 </div>
                                 <button delete-line line-id="${line.id}" class="delete is-medium ml-2"></button>
                             </td>
@@ -162,7 +193,7 @@ function renderBudget() {
             let categoryHTML = `
                 <thead>
                     <tr>
-                        <th class="is-flex is-justify-content-space-between" style="background-color:#fab1a0; color: white;">
+                        <th class="is-flex is-justify-content-space-between" style="background-color:#${categoryColor}; color: black;">
                             ${categoryDesc}
                             <div class="is-flex is-align-items-center">
                             <button category-id="${categoryId}" category-desc="${categoryDesc}" show-lineitem-form class="button">
@@ -183,5 +214,3 @@ function renderBudget() {
     })
 }
 
-categoryColors = ["FF9AA2", "FFB7B2", "FFDAC1", "E2F0CB", "B5EAD7", 
-    "C7CEEA", "998AD3", "E494D3", "CDF1AF", "87DCC0", "88BBE4"]
