@@ -47,17 +47,12 @@
                                         rel="stylesheet">
                                     <a class="navbar-item" href=""
                                         style="font-family: 'Berkshire Swash', cursive; text-align: center; color: #e17055; font-size: 40px;">
-                                        Ritzy
+                                        Monnaie
                                     </a>
                                 </div>
                             </header>
                         </div>
                     </div>
-                </div>
-
-                <!--- FREE-STANDING LINE CHART ---->
-                <div class="chart">
-                    <img src="./images/plchldrchart.jpg" alt="">
                 </div>
 
                 <!-- DASHBOARD ITEMS --->
@@ -68,9 +63,7 @@
                                 BUDGET
                             </p>
                             <a href="/chart"><div class="panel-block">
-                                <figure class="image is-16x9">
-                                    <img src="./images/1280x720.png">
-                                </figure>
+                            <canvas class="image is-16x9" id="dashChart"></canvas>
                             </div></a>
                         </div>
                     </div>
@@ -123,7 +116,8 @@
         </div>
     </footer>
 </body>
-<script src=" ./dash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="./js/dash.js"></script>
 
 </html>
