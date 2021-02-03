@@ -2,11 +2,13 @@
   margin-left: 50px;
 }
 
-.chart {
-  display: flex;
-  justify-content: center;
-}
 
 aside {
   background-color: whitesmoke;
+}
+
+
+.dashChart {
+  height: 1280px!important;
+  width: 720px;
 }

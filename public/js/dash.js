@@ -27,6 +27,10 @@ const dashConfig = {
     }
 };
 
+
+dashCtx.canvas.width = 581.17;
+dashCtx.canvas.height = 326.91;
+
 const dashChart = new Chart(dashCtx, dashConfig);
 
 // generalized function for adding arrays into other arrays
