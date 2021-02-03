@@ -57,7 +57,7 @@ setTimeout(function () {
 }, 100);
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
+    var letters = '0123456789ABCDEFabcdef'.split('');
     var color = '#';
     for (var i = 0; i < 6; i++ ) {
         color += letters[Math.floor(Math.random() * 16)];
