@@ -217,6 +217,7 @@ function renderBudget() {
                 <tbody>
                     ${lineItemsHTML}
                 </tbody>
+                <br>
             `
             categoriesHTML += categoryHTML
         })
