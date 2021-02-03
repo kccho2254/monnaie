@@ -56,10 +56,12 @@ module.exports = function(app) {
           id: req.user.id
         },
         // include: [db.BudgetCategory],
-        include: [{
-          model: db.BudgetCategory,
+        include: [
+          {
+          model: db.BudgetCategory, 
           include: [db.BudgetLineItem]
-        }],
+        },
+      ],
         attributes: {
           exclude: ["password"]
         }
@@ -74,6 +76,29 @@ module.exports = function(app) {
         })
         user.estimatedTotalCost = estimatedTotalCost
         res.json(user);
+      });
+    }
+  });
+
+  app.get("/api/tasks", (req, res) => {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      db.User.findOne({
+        where: {
+          id: req.user.id
+        },        
+        include: db.Task,
+        attributes: {
+          exclude: ["password"]
+        }
+      }).then(user => {
+        console.log(user);
+        // user.Tasks.forEach(
+          
+        // )
+        res.json(user.Tasks);
       });
     }
   });
@@ -179,7 +204,7 @@ module.exports = function(app) {
     } else {
       db.Task.create({
         taskDesc: req.body.taskDesc,
-        dueDate: req.body.datepicker,
+        dueDate: req.body.dueDate,
         completed: false,
         UserId: req.user.id
       }).then(task => {
