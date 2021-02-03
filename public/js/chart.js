@@ -13,14 +13,14 @@ const config = {
                 label: 'Estimated Cost',
                 data: estimated,
                 backgroundColor: 'palegoldenrod',
-                barThickness: 20,
+                barThickness: 40,
                 barPercentage: .5
 
             }, {
                 label: 'Actual Cost',
                 data: actual,
                 backgroundColor: 'gainsboro',
-                barThickness: 20,
+                barThickness: 40,
                 barPercentage: .5
             }
         ]
