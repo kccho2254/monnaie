@@ -15,6 +15,11 @@
     color: black;
 }
 
+#adder h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 #incomplete-task {
     margin: 2vh 5vw 0px 1vw;
     width: 50vw;
