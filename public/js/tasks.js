@@ -111,7 +111,7 @@ $(document).ready(function() {
       $("#incomplete").append(taskList);
       taskList.append(newTaskDesc);
       taskList.append(newTaskDiv);
-      newTaskDiv.append(newTaskDate);
+      newTaskDiv.append("Due: ", newTaskDate);
       newTaskDiv.append(completeBtn);
       
     } else {

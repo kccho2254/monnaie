@@ -5,7 +5,7 @@
 }
 
 #adder {
-    margin: 20px;
+    margin: 2vw;
     width: 15vw;
     height: auto;
     padding: 5px 15px 5px 15px;
@@ -16,8 +16,8 @@
 }
 
 #incomplete-task {
-    margin: 20px 10vw 0px 20px;
-    width: 40vw;
+    margin: 2vh 5vw 0px 1vw;
+    width: 50vw;
     height: auto;
     padding: 5px 15px 5px 15px;
 }
@@ -36,18 +36,18 @@
     justify-content: space-between;
     margin-top: 2px;
     padding: 5px;   
-    border: solid 2px rgb(48, 204, 1);
+    border: solid 2px rgb(223, 208, 2);
     border-radius: 15px;
-    background-color: rgb(192, 250, 175);
+    background-color: rgb(253, 247, 163);
     color: black;
 }
 
 #incomplete-task div {
-    padding: 3px;
+    padding: 3px 0 0 0;
 }
 
 #complete-task {
-    margin-top: 20px;
+    margin-top: 2vh;
     width: 40vw;
     height: auto;
     padding: 5px 15px 5px 15px;
