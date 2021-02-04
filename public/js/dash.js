@@ -54,7 +54,7 @@ $.get("/api/user_data").then((json) => {
 // Data wasn't loading fast enough so set a timeout to load the data slower
 setTimeout(function () {
     dashChart.update();
-}, 100);
+}, 500);
 
 function getRandomColor() {
     var letters = '0123456789ABCDEFabcdef'.split('');

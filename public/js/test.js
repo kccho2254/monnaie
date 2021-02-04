@@ -104,4 +104,4 @@ function autocomplete(inp, arr) {
     });
 }
 
-autocomplete(document.getElementById("myInput"), labels);
+autocomplete(document.getElementById("autocompletePresets"), labels);
