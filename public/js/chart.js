@@ -34,7 +34,7 @@ const config = {
                 {
                     ticks: {
                         min: 0,
-                        max: 80000
+                        max: 40000
                     }
                 }
             ]
