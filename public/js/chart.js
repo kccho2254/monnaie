@@ -74,7 +74,7 @@ $.get("/api/user_data").then((json) => {
 // Data wasn't loading fast enough so set a timeout to load the data slower
 setTimeout(function () {
     chart.update();
-}, 100);
+}, 1000);
 
 // Changes the graph type on click. It glitches if you zoom in and out though
 $("#line").click(function () {
