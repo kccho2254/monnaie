@@ -1,34 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/style.css" type="text/css" />
+    <link rel="stylesheet" href="./stylesheets/style.css" type="text/css" />   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+<<<<<<< HEAD
     <a class="navbar-item" href="/dash" style="font-family: 'Berkshire Swash', cursive; font-size: 50px; color: #e17055;">
+=======
+    <link rel="stylesheet" href="./stylesheets/task.css" type="text/css" />     
+    <a class="navbar-item" href="/" style="font-family: 'Berkshire Swash', cursive; font-size: 50px; color: #e17055;">
+>>>>>>> df3bc09e17d95da92cff294c9fb524b3ce7acdf0
         Tasks
     </a>
-    </div>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="./js/tasks.js"></script>
 </head>
-
 <body>
-    <div id="task-list">
-        <h2>Tasks that still need to be completed</h2>
-        <ul id="incomplete">
-            <li>task a</li>
-            <button class="change-completed">Complete</button>
-            <button class="edit">Edit</button>
-        </ul>
-        <h2>Completed Tasks</h2>
-        <ul id="complete">
-            <li>task b</li>
-            <button>Delete</button>
-        </ul>
-    </div>
+
     <div id="adder">
         <div id="container">
             <h2>Add a task</h2>
@@ -43,7 +34,24 @@
         </div>
     </div>
 
+    <div id="task-list">
+        <div id="incomplete-task">
+            <h2>Tasks that still need to be completed</h2>
+                <ul id="incomplete">
+                    <li>task a<button class="change-completed">Complete</button></li>
+                    
+                    <!-- <button class="edit">Edit</button> -->
+                </ul>
+        </div>
+
+        <div id="complete-task">
+            <h2>Completed Tasks</h2>
+            <ul id="complete">
+                <li>task b<button>Delete</button></li>
+                
+            </ul>
+        </div>        
+    </div>    
+
 </body>
-
-
 </html>

@@ -157,6 +157,26 @@ module.exports = function(app) {
     }
   });
 
+  app.put("/api/tasks/:taskId", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.Task.update(
+        {
+          completed: true
+        },
+        {
+          where: {
+            id: req.params.taskId,
+            UserId: req.user.id // Restrict only user to modify their own custom category
+          }
+        }
+      ).then(budgetCategory => {
+        res.json(budgetCategory);
+      });
+    }
+  });
+
   // Posting a new line item
   app.post("/api/lineitem", (req, res) => {
     if (!req.user) {
@@ -237,6 +257,18 @@ module.exports = function(app) {
     } else {
       db.BudgetLineItem.destroy({
         where: {id: req.params.id}
+      }).then(task => {
+        res.json(task);
+      });
+    }
+  });
+
+  app.delete("/api/tasks/:taskId", (req, res) => {
+    if (!req.user) {
+      res.json({});
+    } else {
+      db.Task.destroy({
+        where: {id: req.params.taskId}
       }).then(task => {
         res.json(task);
       });

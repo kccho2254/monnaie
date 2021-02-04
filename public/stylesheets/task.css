@@ -1,0 +1,74 @@
+#task-list {
+    display: flex;
+    justify-content: flex-start;    
+    flex-direction: row;
+}
+
+#adder {
+    margin: 20px;
+    width: 15vw;
+    height: auto;
+    padding: 5px 15px 5px 15px;
+    border: solid 2px rgb(233, 142, 6);
+    border-radius: 15px;
+    background-color: rgb(253, 225, 184);
+    color: black;
+}
+
+#incomplete-task {
+    margin: 20px 10vw 0px 20px;
+    width: 40vw;
+    height: auto;
+    padding: 5px 15px 5px 15px;
+}
+
+#incomplete-task h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#incomplete-task ul {
+    margin-top: 10px;
+}
+
+#incomplete-task li { 
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+    padding: 5px;   
+    border: solid 2px rgb(48, 204, 1);
+    border-radius: 15px;
+    background-color: rgb(192, 250, 175);
+    color: black;
+}
+
+#incomplete-task div {
+    padding: 3px;
+}
+
+#complete-task {
+    margin-top: 20px;
+    width: 40vw;
+    height: auto;
+    padding: 5px 15px 5px 15px;
+}
+
+#complete-task h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#complete-task ul {
+    margin-top: 10px;
+}
+
+#complete-task li { 
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+    padding: 5px;   
+    border: solid 2px rgb(48, 204, 1);
+    border-radius: 15px;
+    background-color: rgb(192, 250, 175);
+    color: black;
+}
