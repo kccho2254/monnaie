@@ -6,26 +6,27 @@ $( function() {
 
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-  $(".change-completed").on("click", function(event) {
-    var id = $(this).data("id");
-    var newCompleted = $(this).data("newCompleted");
+  // $(".change-completed").on("click", function(event) {
+  //   var id = $(this).data("id");
+  //   // var newCompleted = $(this).data("newCompleted");
+  //   // var newCompleted = $(this).data("completed");
+  //   console.log("completed" + id);
+  //   var newCompletedState = {
+  //     completed: true
+  //   };
 
-    var newCompletedState = {
-      completed: newCompleted
-    };
-
-    // Send the PUT request.
-    $.ajax("/api/tasks/" + id, {
-      type: "PUT",
-      data: newCompletedState
-    }).then(
-      function() {
-        console.log("changed Completed to", newCompleted);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
+  //   // Send the PUT request.
+  //   $.ajax("/api/tasks/" + id, {
+  //     type: "PUT",
+  //     data: newCompletedState
+  //   }).then(
+  //     function() {
+  //       console.log("changed Completed to true");
+  //       // Reload the page to get the updated list
+  //       location.reload();
+  //     }
+  //   );
+  // });
 
   $(".create-form").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
@@ -57,19 +58,13 @@ $(function() {
 $(document).ready(function() {
   // Container holds all of our tasks
   var taskList = $("#task-list");
-  // var postCategorySelect = $("#category");
+  
   // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", deleteTask);
-  $(document).on("click", "button.edit", handleTaskEdit);
+  $(document).on("click", "button.complete", completeTask);
+
   // Variable to hold our tasks
-  var tasks;
-
-  // $.get("/api/user_data").then(data => {
-  //   console.log(data);
-  //   // initializeRows();
-  // });
-
- 
+  var tasks; 
 
     $.get("/api/tasks", function(data) {
       console.log("Tasks", data);
@@ -81,19 +76,8 @@ $(document).ready(function() {
         initializeRows();
       }
     });
+
   
-
-  // This function does an API call to delete tasks
-  function deleteTask(id) {
-    $.ajax({
-      method: "DELETE",
-      url: "/api/tasks/" + id
-    })
-      .then(function() {
-        getTasks(postCategorySelect.val());
-      });
-  }
-
 // InitializeRows handles appending all of our constructed post HTML inside blogContainer
   function initializeRows() {
     var tasksToAdd = [];
@@ -104,61 +88,87 @@ $(document).ready(function() {
   }
 
   // This function constructs a post's HTML
-  function createNewRow(tasks) {
+  function createNewRow(task) {
+
+    console.log(task);
 
     var taskList = $("<li>");    
     var completeBtn = $("<button>");
-    var editBtn = $("<button>");
     var deleteBtn = $("<button>");
     var newTaskDesc = $("<h3>");
     var newTaskDate = $("<small>");
+    var newTaskDiv = $("<div>")
 
-    newTaskDesc.text(tasks.taskDesc);
+    newTaskDesc.text(task.taskDesc);
+    completeBtn.text("Complete");
+    completeBtn.data("taskId", task.id);
+    completeBtn.addClass("complete");
     deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger");
-    editBtn.text("EDIT");
-    editBtn.addClass("edit btn btn-info");
-    
+    deleteBtn.data("taskId", task.id);
+    deleteBtn.addClass("delete btn btn-danger");    
 
-    if (tasks.completed === false) {
+    if (task.completed === false) {
       $("#incomplete").append(taskList);
       taskList.append(newTaskDesc);
-      taskList.append(newTaskDate);
-      taskList.append(completeBtn);
-      taskList.append(deleteBtn);
-      taskList.append(editBtn);
+      taskList.append(newTaskDiv);
+      newTaskDiv.append(newTaskDate);
+      newTaskDiv.append(completeBtn);
+      
     } else {
-      $("complete").append(taskList);
+      $("#complete").append(taskList);
       taskList.append(newTaskDesc);
       taskList.append(newTaskDate);
-      
+      taskList.append(deleteBtn);
     }    
 
-    newTaskDesc.text(tasks.taskDesc);
-    newTaskDate.text(tasks.dueDate);
-    // newTaskDesc.append(newTaskDate);;
-    // newPostCard.data("post", post);
-    // return newPostCard;
+    newTaskDesc.text(task.taskDesc);
+    newTaskDate.text(task.dueDate);
   }
 
-  // This function figures out which post we want to delete and then calls deletePost
-  function handleTaskDelete() {
-    var currentTask = $(this)
-      // .parent()
-      // .parent()
-      // .data("tasks");
 
-    deleteTask(currentTask.id);
+  function completeTask() {
+    // $(".change-completed").on("click", function(event) {
+      var id = $(this).data("taskId");
+      // var newCompleted = $(this).data("newCompleted");
+      // var newCompleted = $(this).data("completed");
+      console.log("complete", id);
+      var newCompletedState = {
+        completed: true
+      };
+  
+      // Send the PUT request.
+      $.ajax("/api/tasks/" + id, {
+        type: "PUT",
+        data: newCompletedState
+      }).then(
+        function() {
+          console.log("changed Completed to true");
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+  }
+
+  function deleteTask() {
+      var id = $(this).data("taskId");
+      console.log("delete", id);
+  
+      // Send the delete request.
+      $.ajax("/api/tasks/" + id, {
+        type: "DELETE",
+      }).then(
+        function() {
+          location.reload();
+        }
+      );
   }
 
   // This function figures out which post we want to edit and takes it to the appropriate url
-  function handleTaskEdit() {
-    var currentTask = $(this)
-      .parent()
-      .parent()
-      .data("post");
-    window.location.href = "/cms?post_id=" + currentTask.id;
-  }
+  // function handleTaskEdit() {
+  //   var currentTask = $(this).data("id");
+  //   console
+  //   window.location.href = "/cms?post_id=" + currentTask.id;
+  // }
 
 //   // This function displays a message when there are no posts
 //   function displayEmpty(id) {
