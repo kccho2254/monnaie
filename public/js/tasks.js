@@ -117,7 +117,6 @@ $(document).ready(function() {
     } else {
       $("#complete").append(taskList);
       taskList.append(newTaskDesc);
-      taskList.append(newTaskDate);
       taskList.append(deleteBtn);
     }    
 
